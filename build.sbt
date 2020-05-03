@@ -14,3 +14,8 @@ libraryDependencies ++= Seq(
   // https://github.com/tomakehurst/wiremock/releases
   "com.github.tomakehurst" % "wiremock" % "2.26.3"
 )
+
+import xerial.sbt.Sonatype._
+sonatypeProjectHosting := Some(GitHubHosting("bartholomews", "scalatestudo", "scalatestudo@bartholomews.io"))
+publishTo := sonatypePublishToBundle.value
+publishMavenStyle := true
