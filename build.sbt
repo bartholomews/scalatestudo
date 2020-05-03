@@ -1,11 +1,23 @@
-organization := "io.bartholomews"
 name := "scalatestudo"
-version := "0.0.1-SNAPSHOT"
 scalaVersion := "2.13.1"
 
-resolvers += "Sonatype OSS Snapshots".at("https://oss.sonatype.org/content/repositories/snapshots")
-libraryDependencies += "io.bartholomews" %% "fsclient" % "0.0.1-SNAPSHOT"
+inThisBuild(
+  List(
+    organization := "io.bartholomews",
+    homepage := Some(url("https://github.com/bartholomews/scalatestudo")),
+    licenses += ("MIT", url("http://opensource.org/licenses/MIT")),
+    developers := List(
+      Developer(
+        "bartholomews",
+        "Federico Bartolomei",
+        "scalatestudo@bartholomews.io",
+        url("https://bartholomews.io")
+      )
+    )
+  )
+)
 
+libraryDependencies += "io.bartholomews" %% "fsclient" % "0.0.1"
 libraryDependencies ++= Seq(
   // https://github.com/scalatest/scalatest/releases
   "org.scalatest" %% "scalatest" % "3.1.1",
@@ -14,8 +26,3 @@ libraryDependencies ++= Seq(
   // https://github.com/tomakehurst/wiremock/releases
   "com.github.tomakehurst" % "wiremock" % "2.26.3"
 )
-
-import xerial.sbt.Sonatype._
-sonatypeProjectHosting := Some(GitHubHosting("bartholomews", "scalatestudo", "scalatestudo@bartholomews.io"))
-publishTo := sonatypePublishToBundle.value
-publishMavenStyle := true

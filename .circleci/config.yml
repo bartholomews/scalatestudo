@@ -28,6 +28,11 @@ jobs:
             - v1-dependencies-{{ checksum "build.sbt" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
+
+      - run:
+          name: Fetch tags
+          command: git fetch --tags
+
       - run:
           name: Compile code
           command: cat /dev/null | sbt clean compile
@@ -38,5 +43,24 @@ jobs:
           key: v1-dependencies--{{ checksum "build.sbt" }}
 
       - run:
-          name: Publish
-          command: sbt publish
+          name: Setup GPG
+          command: |
+            mkdir ~/.gnupg && touch ~/.gnupg/gpg.conf
+            echo use-agent >> ~/.gnupg/gpg.conf
+            echo pinentry-mode loopback >> ~/.gnupg/gpg.conf
+            echo allow-loopback-pinentry >> ~/.gnupg/gpg-agent.conf
+            echo RELOADAGENT | gpg-connect-agent
+            echo $PGP_SECRET | base64 --decode | gpg --import --no-tty --batch --yes
+
+      - run:
+          name: Release
+          command: sbt ci-release
+
+workflows:
+  version: 2
+  build_test_release:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /^v\d+\.\d+\.\d+$/
