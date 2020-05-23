@@ -1,4 +1,4 @@
-package io.bartholomews.testudo.data
+package io.bartholomews.scalatestudo.data
 
 import org.http4s.client.oauth1.{Consumer, Token}
 

@@ -17,12 +17,12 @@ inThisBuild(
   )
 )
 
-libraryDependencies += "io.bartholomews" %% "fsclient" % "0.0.1"
+libraryDependencies += "io.bartholomews" %% "fsclient" % "0.0.2"
 libraryDependencies ++= Seq(
   // https://github.com/scalatest/scalatest/releases
-  "org.scalatest" %% "scalatest" % "3.1.1",
+  "org.scalatest" %% "scalatest" % "3.1.2",
   // https://github.com/softwaremill/diffx/releases
-  "com.softwaremill.diffx" %% "diffx-scalatest" % "0.3.27",
+  "com.softwaremill.diffx" %% "diffx-scalatest" % "0.3.28",
   // https://github.com/tomakehurst/wiremock/releases
   "com.github.tomakehurst" % "wiremock" % "2.26.3"
 )

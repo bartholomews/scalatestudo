@@ -1,10 +1,17 @@
-package io.bartholomews.testudo.diffs
+package io.bartholomews.scalatestudo.diffs
 
 import com.softwaremill.diffx.scalatest.DiffMatcher
-import com.softwaremill.diffx.{Diff, DiffResult, DiffResultObject, Identical}
+import com.softwaremill.diffx.{Derived, Diff, DiffResult, DiffResultObject, Identical}
+import io.bartholomews.fsclient.entities.oauth.{AuthorizationCode, NonRefreshableToken}
 import org.http4s.Uri
 
 trait DiffDerivations extends DiffMatcher {
+
+  implicit val nonRefreshableTokenDiff: Diff[NonRefreshableToken] =
+    Derived[Diff[NonRefreshableToken]].ignore[NonRefreshableToken, Long](_.generatedAt)
+
+  implicit val authorizationCodeTokenDiff: Diff[AuthorizationCode] =
+    Derived[Diff[AuthorizationCode]].ignore[AuthorizationCode, Long](_.generatedAt)
 
   /**
    * implicit val diffCaseClassWithPrivateConstructor: Diff[CaseClassWithPrivateConstructor] =

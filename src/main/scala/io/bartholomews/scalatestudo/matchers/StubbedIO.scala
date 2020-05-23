@@ -1,4 +1,4 @@
-package io.bartholomews.testudo.matchers
+package io.bartholomews.scalatestudo.matchers
 
 import com.github.tomakehurst.wiremock.stubbing.StubMapping
 import io.bartholomews.fsclient.utils.HttpTypes.{HttpResponse, IOResponse}

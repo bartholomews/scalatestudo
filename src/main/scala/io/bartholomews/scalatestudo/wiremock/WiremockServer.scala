@@ -1,4 +1,4 @@
-package io.bartholomews.testudo.wiremock
+package io.bartholomews.scalatestudo.wiremock
 
 import com.github.tomakehurst.wiremock.WireMockServer
 import com.github.tomakehurst.wiremock.client.WireMock.{aResponse, anyUrl, get, stubFor}

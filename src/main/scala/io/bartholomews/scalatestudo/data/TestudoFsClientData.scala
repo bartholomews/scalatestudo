@@ -1,10 +1,13 @@
-package io.bartholomews.testudo.data
+package io.bartholomews.scalatestudo.data
 
-import io.bartholomews.fsclient.config.FsClientConfig.ConsumerConfig
-import io.bartholomews.fsclient.config.UserAgent
+import cats.effect.{ConcurrentEffect, ContextShift}
+import io.bartholomews.fsclient.client.FsClientV2
+import io.bartholomews.fsclient.config.{FsClientConfig, UserAgent}
+import io.bartholomews.fsclient.entities.oauth._
 import io.bartholomews.fsclient.entities.oauth.v2.OAuthV2AuthorizationFramework._
-import io.bartholomews.fsclient.entities.oauth.{AuthorizationCode, NonRefreshableToken, Scope}
 import org.http4s.Uri
+
+import scala.concurrent.ExecutionContext
 
 trait TestudoFsClientData extends TestudoHttp4sData {
 
@@ -12,14 +15,6 @@ trait TestudoFsClientData extends TestudoHttp4sData {
     appName = "SAMPLE_APP_NAME",
     appVersion = Some("SAMPLE_APP_VERSION"),
     appUrl = Some("https://bartholomews.io/sample-app-url")
-  )
-
-  val sampleConsumerConfig: ConsumerConfig = ConsumerConfig(
-    appName = sampleUserAgent.appName,
-    appVersion = sampleUserAgent.appVersion,
-    appUrl = sampleUserAgent.appUrl,
-    key = sampleConsumer.key,
-    secret = sampleConsumer.secret
   )
 
   val sampleTokenEndpoint: Uri =
@@ -31,6 +26,12 @@ trait TestudoFsClientData extends TestudoHttp4sData {
     val sampleClientSecret: ClientSecret = ClientSecret("SAMPLE_CLIENT_SECRET")
     val sampleClientPassword: ClientPassword = ClientPassword(sampleClientId, sampleClientSecret)
 
+    def sampleClient[F[_]: ConcurrentEffect](implicit ec: ExecutionContext,
+                                             cs: ContextShift[F]): FsClientV2[F, SignerV2] = FsClientV2[F, SignerV2](
+      appConfig = FsClientConfig(sampleUserAgent, ClientPasswordBasicAuthenticationV2(OAuthV2.sampleClientPassword)),
+      OAuthV2.sampleClientPassword
+    )
+
     val sampleAccessTokenKey: AccessToken = AccessToken(
       "00000000000-0000000000000000000-0000000-0000000000000000000000000000000000000000001"
     )
@@ -38,14 +39,16 @@ trait TestudoFsClientData extends TestudoHttp4sData {
     val sampleRefreshToken: RefreshToken = RefreshToken("SAMPLE_REFRESH_TOKEN")
 
     val sampleAuthorizationCode: AuthorizationCode = AuthorizationCode(
+      generatedAt = 21312L,
       accessToken = sampleAccessTokenKey,
       tokenType = "bearer",
       expiresIn = 1000L,
-      refreshToken = sampleRefreshToken,
+      refreshToken = Some(sampleRefreshToken),
       scope = Scope(List.empty)
     )
 
     val sampleNonRefreshableToken: NonRefreshableToken = NonRefreshableToken(
+      generatedAt = 21312L,
       accessToken = sampleAccessTokenKey,
       tokenType = "bearer",
       expiresIn = 1000L,

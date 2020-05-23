@@ -1,4 +1,4 @@
-package io.bartholomews.testudo
+package io.bartholomews.scalatestudo
 
 import org.scalatest.wordspec.AnyWordSpec
 

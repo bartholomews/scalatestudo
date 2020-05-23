@@ -1,4 +1,4 @@
-package io.bartholomews.testudo.wiremock
+package io.bartholomews.scalatestudo.wiremock
 
 import com.github.tomakehurst.wiremock.client.ResponseDefinitionBuilder
 import com.github.tomakehurst.wiremock.common.FileSource
