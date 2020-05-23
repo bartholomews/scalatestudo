@@ -7,7 +7,7 @@ Test library with utils for [fsclient](https://github.com/bartholomews/fsclient)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.bartholomews/scalatestudo_2.13/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.bartholomews/scalatestudo_2.13)
 
 ```
-libraryDependencies += "io.bartholomews" %% "scalatestudo" % "<VERSION>"
+libraryDependencies += "io.bartholomews" %% "scalatestudo" % "0.0.2"
 ```
 
 ### CI/CD Pipeline
