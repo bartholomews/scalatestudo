@@ -1,9 +1,14 @@
 [![CircleCI](https://circleci.com/gh/bartholomews/scalatestudo/tree/master.svg?style=svg)](https://circleci.com/gh/bartholomews/scalatestudo/tree/master)
 [![License: MIT](https://img.shields.io/badge/License-MIT-maroon.svg)](https://opensource.org/licenses/MIT)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.bartholomews/scalatestudo_2.13/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.bartholomews/scalatestudo_2.13)
 
 # scalatestudo
 Test library with utils for [fsclient](https://github.com/bartholomews/fsclient)
+
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.bartholomews/scalatestudo_2.13/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.bartholomews/scalatestudo_2.13)
+
+```
+libraryDependencies += "io.bartholomews" %% "scalatestudo" % "<VERSION>"
+```
 
 ### CI/CD Pipeline
 
