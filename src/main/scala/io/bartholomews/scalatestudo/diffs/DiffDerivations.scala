@@ -38,7 +38,7 @@ trait DiffDerivations extends DiffMatcher {
       .collectFirst({ case result if !result.isIdentical => diffResultObject })
       .getOrElse(Identical(value))
 
-  implicit val diffUri: Diff[Uri] = Diff[String].contramap[Uri](_.renderString)
+  implicit val diffUri: Derived[Diff[Uri]] = Derived(Diff[String].contramap[Uri](_.renderString))
 }
 
 object DiffDerivations extends DiffDerivations
