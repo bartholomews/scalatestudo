@@ -3,5 +3,6 @@
 /project/project/
 /project/target/
 /target/
+.bsp
 .idea/
 src/main/main.iml
