@@ -1,5 +1,5 @@
 name := "scalatestudo"
-scalaVersion := "2.13.2"
+scalaVersion := "2.13.3"
 
 inThisBuild(
   List(
@@ -17,12 +17,12 @@ inThisBuild(
   )
 )
 
-libraryDependencies += "io.bartholomews" %% "fsclient" % "0.0.2"
+libraryDependencies += "io.bartholomews" %% "fsclient" % "0.0.3"
 libraryDependencies ++= Seq(
   // https://github.com/scalatest/scalatest/releases
   "org.scalatest" %% "scalatest" % "3.2.2",
   // https://github.com/softwaremill/diffx/releases
   "com.softwaremill.diffx" %% "diffx-scalatest" % "0.3.29",
   // https://github.com/tomakehurst/wiremock/releases
-  "com.github.tomakehurst" % "wiremock" % "2.27.1"
+  "com.github.tomakehurst" % "wiremock" % "2.27.2"
 )

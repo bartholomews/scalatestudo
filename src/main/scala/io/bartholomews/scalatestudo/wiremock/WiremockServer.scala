@@ -13,10 +13,10 @@ trait WiremockServer extends BeforeAndAfterAll with BeforeAndAfterEachTestData w
     new WireMockConfiguration().extensions(ResourceFileJsonTransformer)
   )
 
-  override def beforeAll: Unit =
+  override def beforeAll(): Unit =
     server.start()
 
-  override def afterAll: Unit =
+  override def afterAll(): Unit =
     server.stop()
 
   def stubWithResourceFile: StubMapping =
