@@ -17,8 +17,9 @@ inThisBuild(
   )
 )
 
-libraryDependencies += "io.bartholomews" %% "fsclient" % "0.0.3"
 libraryDependencies ++= Seq(
+  // https://github.com/softwaremill/sttp/releases
+  "com.softwaremill.sttp.client" %% "core" % "2.2.9",
   // https://github.com/scalatest/scalatest/releases
   "org.scalatest" %% "scalatest" % "3.2.2",
   // https://github.com/softwaremill/diffx/releases

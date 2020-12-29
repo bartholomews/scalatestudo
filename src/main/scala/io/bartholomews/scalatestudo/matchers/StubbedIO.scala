@@ -1,13 +1,13 @@
 package io.bartholomews.scalatestudo.matchers
 
 import com.github.tomakehurst.wiremock.stubbing.StubMapping
-import io.bartholomews.fsclient.utils.HttpTypes.{HttpResponse, IOResponse}
 import org.scalatest.{Assertion, Inside}
+import sttp.client.{Response, ResponseError}
 
 trait StubbedIO extends Inside {
 
   /**
-   *  Assert with a partial function on `HttpResponse` given a `IOResponse` request and a `StubMapping` stub
+   *  Assert with a partial function on sttp `Response` given a request and a `StubMapping` stub
    *
    *  "the server responds with the expected string message" should {
    *
@@ -23,20 +23,27 @@ trait StubbedIO extends Inside {
    *       )
    *
    *  "return a Right with expected response" in matchResponse(stub, request) {
-   *      case FsResponseSuccess(_, _, response) =>
+   *      case Response(Right(response), statusCode, _, _ , _) =>
    *          response shouldBe("Response text")
    *   }
    *
    * @param stubMapping the stub to be setup before making the request
    * @param request the request to make
-   * @param pf a partial function with assertion based on the `HttpResponse`
+   * @param pf a partial function with assertion based on the sttp `Response`
    * @tparam T the expected success response type
    * @return
    */
-  def matchResponse[T](stubMapping: => StubMapping, request: IOResponse[T])(
-    pf: PartialFunction[HttpResponse[T], Assertion]
+  def matchIdResponse[E <: ResponseError[_], T](stubMapping: => StubMapping, request: => Response[Either[E, T]])(
+    pf: PartialFunction[Response[Either[E, T]], Assertion]
   ): Assertion = {
     stubMapping
-    inside(request.unsafeRunSync())(pf)
+    inside(request)(pf)
+  }
+
+  def matchResponseBody[E <: ResponseError[_], T](stubMapping: => StubMapping, request: => Response[Either[E, T]])(
+    pf: PartialFunction[Either[E, T], Assertion]
+  ): Assertion = {
+    stubMapping
+    inside(request.body)(pf)
   }
 }
