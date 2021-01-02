@@ -9,8 +9,12 @@ import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEachTestData, Suite, Test
 trait WiremockServer extends BeforeAndAfterAll with BeforeAndAfterEachTestData with WiremockUtils {
   self: Suite =>
 
-  private val server: WireMockServer = new WireMockServer(
-    new WireMockConfiguration().extensions(ResourceFileJsonTransformer)
+  def testResourcesFileRoot: String // "src/test/resources"
+
+  private lazy val server: WireMockServer = new WireMockServer(
+    new WireMockConfiguration()
+      .withRootDirectory(testResourcesFileRoot)
+      .extensions(ResourceFileJsonTransformer)
   )
 
   override def beforeAll(): Unit =

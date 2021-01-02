@@ -33,15 +33,15 @@ trait StubbedIO extends Inside {
    * @tparam T the expected success response type
    * @return
    */
-  def matchIdResponse[E <: ResponseError[_], T](stubMapping: => StubMapping, request: => Response[Either[E, T]])(
-    pf: PartialFunction[Response[Either[E, T]], Assertion]
+  def matchIdResponse[E, T](stubMapping: => StubMapping, request: => Response[Either[ResponseError[E], T]])(
+    pf: PartialFunction[Response[Either[ResponseError[E], T]], Assertion]
   ): Assertion = {
     stubMapping
     inside(request)(pf)
   }
 
-  def matchResponseBody[E <: ResponseError[_], T](stubMapping: => StubMapping, request: => Response[Either[E, T]])(
-    pf: PartialFunction[Either[E, T], Assertion]
+  def matchResponseBody[E, T](stubMapping: => StubMapping, request: => Response[Either[ResponseError[E], T]])(
+    pf: PartialFunction[Either[ResponseError[E], T], Assertion]
   ): Assertion = {
     stubMapping
     inside(request.body)(pf)
