@@ -2,12 +2,12 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-maroon.svg)](https://opensource.org/licenses/MIT)
 
 # scalatestudo
-Test library with utils for [fsclient](https://github.com/bartholomews/fsclient)
+Test library with utils for wiremock and sttp
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.bartholomews/scalatestudo_2.13/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.bartholomews/scalatestudo_2.13)
 
 ```
-libraryDependencies += "io.bartholomews" %% "scalatestudo" % "0.0.2"
+libraryDependencies += "io.bartholomews" %% "scalatestudo" % "0.0.3"
 ```
 
 ### CI/CD Pipeline
