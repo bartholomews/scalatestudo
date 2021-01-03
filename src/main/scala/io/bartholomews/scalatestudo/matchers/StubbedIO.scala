@@ -2,7 +2,7 @@ package io.bartholomews.scalatestudo.matchers
 
 import com.github.tomakehurst.wiremock.stubbing.StubMapping
 import org.scalatest.{Assertion, Inside}
-import sttp.client.{Response, ResponseError}
+import sttp.client3.{Response, ResponseException}
 
 trait StubbedIO extends Inside {
 
@@ -33,15 +33,17 @@ trait StubbedIO extends Inside {
    * @tparam T the expected success response type
    * @return
    */
-  def matchIdResponse[E, T](stubMapping: => StubMapping, request: => Response[Either[ResponseError[E], T]])(
-    pf: PartialFunction[Response[Either[ResponseError[E], T]], Assertion]
+  def matchIdResponse[DE, T](stubMapping: => StubMapping,
+                             request: => Response[Either[ResponseException[String, DE], T]])(
+    pf: PartialFunction[Response[Either[ResponseException[String, DE], T]], Assertion]
   ): Assertion = {
     stubMapping
     inside(request)(pf)
   }
 
-  def matchResponseBody[E, T](stubMapping: => StubMapping, request: => Response[Either[ResponseError[E], T]])(
-    pf: PartialFunction[Either[ResponseError[E], T], Assertion]
+  def matchResponseBody[DE, T](stubMapping: => StubMapping,
+                               request: => Response[Either[ResponseException[String, DE], T]])(
+    pf: PartialFunction[Either[ResponseException[String, DE], T], Assertion]
   ): Assertion = {
     stubMapping
     inside(request.body)(pf)

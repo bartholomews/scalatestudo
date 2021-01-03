@@ -8,7 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 ### Removed
+- fsclient dependencies
 ### Changed
+- migrated to sttp v3
 ### Fixed
 
 ## [0.0.3] - 2021-01-02
